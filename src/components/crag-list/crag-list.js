@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CragListItem from '../crag-list-item';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { withService } from '../hoc';
 import { cragsLoaded } from '../../actions'
 import './crag-list.css';
