@@ -10,6 +10,10 @@ export default class Service {
             {
                 id: 2,
                 name: 'Massone'
+            },
+            {
+                id: 3,
+                name: 'Zoo'
             }
         ];
     }
