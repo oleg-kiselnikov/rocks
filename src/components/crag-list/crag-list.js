@@ -35,10 +35,6 @@ const mapStateToProps = ({ crags }) => {
     return { crags };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-        cragsLoaded
-    }, dispatch);
-};
+const mapDispatchToProps = { cragsLoaded  };
 
 export default withService()(connect(mapStateToProps, mapDispatchToProps)(CragList));
