@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import CragListItem from '../crag-list-item';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withService } from '../hoc';
+import { cragsLoaded } from '../../actions'
 import './crag-list.css';
 
 class CragList extends Component {
+
+    componentDidMount() {
+        const { service } = this.props;
+        const data = service.getCrags();
+        this.props.cragsLoaded(data);
+    }
+
     render() {
         const { crags } = this.props;
 
@@ -21,4 +31,17 @@ class CragList extends Component {
     }
 }
 
-export default CragList;
+const mapStateToProps = ({ crags }) => {
+    return { crags };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    
+    return {
+        cragsLoaded: (newCrags) => {
+            dispatch(cragsLoaded(newCrags))
+        }
+    };
+};
+
+export default withService()(connect(mapStateToProps, mapDispatchToProps)(CragList));
