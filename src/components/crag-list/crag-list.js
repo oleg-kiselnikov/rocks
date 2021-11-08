@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import CragListItem from '../crag-list-item';
 import { connect } from 'react-redux';
 import { withService } from '../hoc';
-import { cragsLoaded } from '../../actions'
+import { cragsLoaded } from '../../actions';
+import { compose } from '../../utils';
 import './crag-list.css';
 
 class CragList extends Component {
@@ -36,4 +37,7 @@ const mapStateToProps = ({ crags }) => {
 
 const mapDispatchToProps = { cragsLoaded  };
 
-export default withService()(connect(mapStateToProps, mapDispatchToProps)(CragList));
+export default compose(
+    withService(), 
+    connect(mapStateToProps, mapDispatchToProps)
+)(CragList);
