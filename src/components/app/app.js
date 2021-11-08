@@ -1,10 +1,8 @@
 import React from 'react';
 import './app.css';
-import { withService } from '../hoc';
 
-const App = ({ service }) => {
-    console.log(service.getCrags());
+const App = () => {
     return <div>Hello!</div>
 };
 
-export default withService()(App);
+export default App;
