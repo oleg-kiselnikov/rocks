@@ -2,6 +2,15 @@
 export default class Service {
 
     getCrags() {
-        return [];
+        return [
+            { 
+                id: 1,
+                name: 'Nago'
+            },
+            {
+                id: 2,
+                name: 'Massone'
+            }
+        ];
     }
 }
