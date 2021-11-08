@@ -12,7 +12,7 @@ class CragList extends Component {
                 {
                     crags.map((crag) => {
                         return (
-                            <li><CragListItem crag={crag}/></li>
+                            <li key={crag.id}><CragListItem crag={crag}/></li>
                         )
                     })
                 }
