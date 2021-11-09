@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './crag-list-item.css';
 
@@ -13,7 +14,9 @@ const CragListItem = ({ crag }) => {
             <div className="crag-details">
                 <span href="#" className="crag-name">{name}</span>
                 <div className="crag-description">{description}</div>
-                <button className="btn btn-info show-details">Details...</button>
+                <Link to="/detail">                    
+                    <button className="btn btn-info show-details">Details...</button>
+                </Link>
             </div>
         </div>
     );

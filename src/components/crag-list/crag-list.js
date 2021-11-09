@@ -3,14 +3,15 @@ import Spinner from '../spinner';
 import CragListItem from '../crag-list-item';
 import { connect } from 'react-redux';
 import { withService } from '../hoc';
-import { cragsLoaded } from '../../actions';
+import { cragsLoaded, cragsRequested } from '../../actions';
 import { compose } from '../../utils';
 import './crag-list.css';
 
 class CragList extends Component {
 
     componentDidMount() {
-        const { service, cragsLoaded } = this.props;
+        const { service, cragsLoaded, cragsRequested } = this.props;
+        cragsRequested();
         service.getCrags()
             .then((data) => cragsLoaded(data));
     }
@@ -40,7 +41,10 @@ const mapStateToProps = ({ crags, loading }) => {
     return { crags, loading };
 };
 
-const mapDispatchToProps = { cragsLoaded  };
+const mapDispatchToProps = { 
+    cragsLoaded,
+    cragsRequested  
+};
 
 export default compose(
     withService(), 

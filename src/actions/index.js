@@ -5,6 +5,13 @@ const cragsLoaded = (newCrags) => {
     }
 };
 
+const cragsRequested = () => {
+    return {
+        type: 'CRAGS_REQUESTED'
+    }
+};
+
 export {
-    cragsLoaded
+    cragsLoaded,
+    cragsRequested
 };
