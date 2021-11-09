@@ -1,7 +1,7 @@
 
 export default class Service {
 
-    data = [
+    demoCrags = [
         { 
             cragId: 1,
             cragName: 'Nago',
@@ -22,14 +22,39 @@ export default class Service {
         }
     ];
 
+    demoRoutes = [
+        { 
+            routeId: 1,
+            routeName: 'Crazy',
+            routeGrade: '6a+',
+            sectorName: 'Sector A'
+        },
+        { 
+            routeId: 1,
+            routeName: 'Easy',
+            routeGrade: '5a+',
+            sectorName: 'Sector B'
+        },
+        { 
+            routeId: 1,
+            routeName: 'Hard',
+            routeGrade: '7a+',
+            sectorName: 'Sector C'
+        }
+    ];
+
     getCrags() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             setTimeout(() => {
-                if (Math.random() > 0.75) {
-                    reject(new Error('Something bad happened'));
-                } else {
-                    resolve(this.data);
-                }
+                resolve(this.demoCrags);
+            }, 700);
+        });
+    }
+
+    getRoutes() {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(this.demoRoutes);
             }, 700);
         });
     }

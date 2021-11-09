@@ -43,7 +43,7 @@ class CragListContainer extends Component {
     }
 }
 
-const mapStateToProps = ({ crags, loading, error }) => {
+const mapStateToProps = ({ cragList: { crags, loading, error } }) => {
     return { crags, loading, error };
 };
 
