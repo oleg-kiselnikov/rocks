@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 import CragListItem from "../crag-list-item";
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withService } from '../hoc';
 import { fetchCrags } from '../../actions';
@@ -48,9 +49,9 @@ const mapStateToProps = ({ cragList: { crags, loading, error } }) => {
 };
 
 const mapDispatchToProps = (dispatch, { service }) => {
-    return {
-        fetchCrags: fetchCrags(service, dispatch)
-    }
+    return bindActionCreators({
+        fetchCrags: fetchCrags(service)
+    }, dispatch);
 };
 
 export default compose(

@@ -20,7 +20,7 @@ const cragsError = (error) => {
     }
 };
 
-const fetchCrags = (service, dispatch) => () => {
+const fetchCrags = (service) => () => (dispatch) => {
     dispatch(cragsRequested());
     service.getCrags()
         .then((data) => dispatch(cragsLoaded(data)))
@@ -47,7 +47,7 @@ const routesError = (error) => {
     }
 };
 
-const fetchRoutes = (service, dispatch) => () => {
+const fetchRoutes = (service) => () => (dispatch) => {    
     dispatch(routesRequested());
     service.getRoutes()
         .then((data) => dispatch(routesLoaded(data)))

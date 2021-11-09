@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withService } from '../hoc';
 import { fetchRoutes } from '../../actions';
@@ -70,9 +71,9 @@ const mapStateToProps = ( { routeTable: { routes, loading, error } }) => {
 };
 
 const mapDispatchToProps = (dispatch, { service }) => {
-    return {
-        fetchRoutes: fetchRoutes(service, dispatch)
-    }
+    return bindActionCreators({
+        fetchRoutes: fetchRoutes(service)
+    }, dispatch);
 };
 
 export default compose(
