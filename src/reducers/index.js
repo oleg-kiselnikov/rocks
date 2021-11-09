@@ -1,26 +1,34 @@
 
 const initialState = {
     crags: [],
-    loading: true
+    loading: true,
+    error: null
 };
 
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
-        case 'CRAGS_REQUESTED':
+        case 'FETCH_CRAGS_REQUEST':
             return {
                 crags: [],
-                loading: true
+                loading: true,
+                error: null
             };
-        case 'CRAGS_LOADED':
+        case 'FETCH_CRAGS_SUCCESS':
             return {
                 crags: action.payload,
-                loading: false
+                loading: false,
+                error: null
+            };
+        case 'FETCH_CRAGS_FAILURE':
+            return {
+                crags: [],
+                loading: false,
+                error: action.payload
             };
         default:
             return state;
     }
-    return state;
 };
 
 export default reducer;

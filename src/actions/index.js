@@ -1,17 +1,32 @@
+
+
+const cragsRequested = () => {
+    return {
+        type: 'FETCH_CRAGS_REQUEST'
+    }
+};
+
 const cragsLoaded = (newCrags) => {
     return {
-        type: 'CRAGS_LOADED',
+        type: 'FETCH_CRAGS_SUCCESS',
         payload: newCrags
     }
 };
 
-const cragsRequested = () => {
+const cragsError = (error) => {
     return {
-        type: 'CRAGS_REQUESTED'
+        type: 'FETCH_CRAGS_FAILURE',
+        payload: error
     }
 };
 
+const fetchCrags = (service, dispatch) => () => {
+    dispatch(cragsRequested());
+    service.getCrags()
+        .then((data) => dispatch(cragsLoaded(data)))
+        .catch((err) => dispatch(cragsError(err)));
+}
+
 export {
-    cragsLoaded,
-    cragsRequested
+    fetchCrags
 };

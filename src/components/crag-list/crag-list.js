@@ -1,52 +1,59 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
-import CragListItem from '../crag-list-item';
+import ErrorIndicator from '../error-indicator';
+import CragListItem from "../crag-list-item";
 import { connect } from 'react-redux';
 import { withService } from '../hoc';
-import { cragsLoaded, cragsRequested } from '../../actions';
+import { fetchCrags } from '../../actions';
 import { compose } from '../../utils';
 import './crag-list.css';
 
-class CragList extends Component {
+const CragList = ({ crags }) => {
+    return (
+        <ul className="crag-list">
+            {
+                crags.map((crag) => {
+                    return (
+                        <li key={crag.id}><CragListItem crag={crag}/></li>
+                    )
+                })
+            }
+        </ul>
+    );
+}
+
+class CragListContainer extends Component {
 
     componentDidMount() {
-        const { service, cragsLoaded, cragsRequested } = this.props;
-        cragsRequested();
-        service.getCrags()
-            .then((data) => cragsLoaded(data));
+        this.props.fetchCrags();
     }
 
     render() {
-        const { crags, loading } = this.props;
+        const { crags, loading, error } = this.props;
         
         if (loading) {
             return <Spinner />;
         }
 
-        return (
-            <ul className="crag-list">
-                {
-                    crags.map((crag) => {
-                        return (
-                            <li key={crag.id}><CragListItem crag={crag}/></li>
-                        )
-                    })
-                }
-            </ul>
-        );
+        if (error) {
+            return <ErrorIndicator />
+        }
+
+        return <CragList crags={crags} />;
     }
 }
 
-const mapStateToProps = ({ crags, loading }) => {
-    return { crags, loading };
+const mapStateToProps = ({ crags, loading, error }) => {
+    return { crags, loading, error };
 };
 
-const mapDispatchToProps = { 
-    cragsLoaded,
-    cragsRequested  
+const mapDispatchToProps = (dispatch, { service }) => {
+    return {
+        fetchCrags: fetchCrags(service, dispatch)
+    }
 };
 
 export default compose(
     withService(), 
     connect(mapStateToProps, mapDispatchToProps)
-)(CragList);
+)(CragListContainer);
