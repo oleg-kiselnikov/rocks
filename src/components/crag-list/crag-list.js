@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Spinner from '../spinner';
 import CragListItem from '../crag-list-item';
 import { connect } from 'react-redux';
 import { withService } from '../hoc';
@@ -9,16 +10,20 @@ import './crag-list.css';
 class CragList extends Component {
 
     componentDidMount() {
-        const { service } = this.props;
-        const data = service.getCrags();
-        this.props.cragsLoaded(data);
+        const { service, cragsLoaded } = this.props;
+        service.getCrags()
+            .then((data) => cragsLoaded(data));
     }
 
     render() {
-        const { crags } = this.props;
+        const { crags, loading } = this.props;
+        
+        if (loading) {
+            return <Spinner />;
+        }
 
         return (
-            <ul>
+            <ul className="crag-list">
                 {
                     crags.map((crag) => {
                         return (
@@ -31,8 +36,8 @@ class CragList extends Component {
     }
 }
 
-const mapStateToProps = ({ crags }) => {
-    return { crags };
+const mapStateToProps = ({ crags, loading }) => {
+    return { crags, loading };
 };
 
 const mapDispatchToProps = { cragsLoaded  };

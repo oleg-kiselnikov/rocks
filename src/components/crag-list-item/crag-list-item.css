@@ -1,0 +1,31 @@
+.crag-list-item {
+    display: flex;
+    margin: 15px 0;
+}
+
+.crag-list-item .crag-view {
+    flex-shrink: 0;
+    width: 140px;
+    margin-right: 30px;
+}
+
+.crag-list-item .crag-view img {
+    max-width: 100%;
+}
+
+.crag-list-item .crag-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    align-items: flex-start;
+}
+
+.crag-list-item .crag-details .crag-name {
+    font-size: 1.2rem;
+}
+
+.crag-list-item .crag-details .crag-description {
+    font-size: 1.0rem;
+}
+
